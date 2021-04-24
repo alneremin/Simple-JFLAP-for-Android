@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Simple JFLAP</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_about_me">About me</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_confirm_password">Confirm password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_confirm_password">Passwords must match</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_search">Search</string>
+    <string name="title_new_note">New Note</string>
+    <string name="title_chat">Chat</string>
+    <string name="label_have_account">Do you have an account?</string>
+    <!-- Strings related to start_activity -->
+    <string name="btn_title_login_start">Login</string>
+    <string name="btn_title_register_start">Register</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_your_projects">Your projects</string>
+    <string name="title_dfa_projects">DETENMINICTIC FA`S</string>
+    <string name="title_nfa_projects">NONDETENMINICTIC FA`S</string>
+    <string name="title_new_project">Title1</string>
+    <string name="cursor_description">cursor for element choice</string>
+
+    <string name="prompt_search">Enter file name</string>
+
+    <string name="btn_sync_with_google">Sync with Google</string>
+    <string name="btn_log_out">Log out</string>
+
+    <string-array name="cat_names">
+        <item>Рыжик</item>
+        <item>Барсик</item>
+        <item>Мурзик</item>
+        <item>Мурка</item>
+        <item>Васька</item>
+        <item>Томасина</item>
+        <item>Кристина</item>
+        <item>Пушок</item>
+        <item>Дымка</item>
+        <item>Кузя</item>
+        <item>Китти</item>
+        <item>Масяня</item>
+        <item>Симба</item>
+    </string-array>
+</resources>

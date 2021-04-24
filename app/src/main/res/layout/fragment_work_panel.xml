@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.work_panel.WorkPanel">
+
+    <EditText
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:textSize="30sp"
+            android:text="@string/title_new_project"
+            android:fontFamily="sans-serif-black"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+            android:textStyle="bold"/>
+    <LinearLayout android:layout_width="50dp"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  android:layout_marginRight="16dp"
+                  android:showDividers="middle"
+                  android:divider="@drawable/divider"
+                  android:id="@+id/linearLayout">
+        <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cursor"
+                android:background="@drawable/btn_work_panel_pressed"
+                android:id="@+id/btn_cursor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="40dp"
+                android:contentDescription="@string/cursor_description"/>
+        <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_state"
+                android:background="@drawable/btn_work_panel_elem_background"
+                android:id="@+id/btn_state"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/cursor_description"
+                app:layout_constraintTop_toBottomOf="@+id/btn_cursor"/>
+        <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_transition"
+                android:background="@drawable/btn_work_panel_elem_background"
+                android:id="@+id/btn_transition"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/cursor_description"
+                app:layout_constraintTop_toBottomOf="@+id/btn_state"/>
+        <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete_elem"
+                android:background="@drawable/btn_work_panel_elem_background"
+                android:id="@+id/btn_delete_elem"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/cursor_description"
+                app:layout_constraintTop_toBottomOf="@+id/btn_transition"/>
+        <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                android:background="@drawable/btn_work_panel_elem_background"
+                android:id="@+id/btn_undo"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/cursor_description"
+                app:layout_constraintTop_toBottomOf="@+id/btn_delete_elem"/>
+        <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_forward"
+                android:background="@drawable/btn_work_panel_elem_background"
+                android:id="@+id/btn_redo"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/cursor_description"
+                app:layout_constraintTop_toBottomOf="@+id/btn_undo"/>
+        <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_baseline_save_24"
+                android:background="@drawable/btn_work_panel_elem_background"
+                android:id="@+id/btn_save_note"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/cursor_description"
+                app:layout_constraintTop_toBottomOf="@+id/btn_redo"/>
+        <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_baseline_event_available_24"
+                android:background="@drawable/btn_work_panel_elem_background"
+                android:id="@+id/btn_test_auto"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/cursor_description"
+                app:layout_constraintTop_toBottomOf="@+id/btn_save_note"/>
+
+    </LinearLayout>
+    <LinearLayout app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  android:layout_marginBottom="70dp"
+                  android:layout_width="0dp"
+                  android:layout_height="0dp"
+                  android:id="@+id/work_board_layout" android:layout_marginTop="64dp">
+
+        <com.sfu_kras.stud.aeremin_ki18.sjflap.ui.work_panel.panel.WorkBoard
+                android:id="@+id/work_board"
+                android:tag="work_board"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <EditText
+                android:text=""
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:layout_width="66dp"
+                android:layout_height="18dp"
+                android:id="@+id/transitionText"
+                android:visibility="invisible"
+                tools:ignore="MissingConstraints" android:background="#BDE8D5"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:id="@+id/state_params"
+            tools:layout_editor_absoluteY="661dp"
+            tools:layout_editor_absoluteX="295dp"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints"
+            android:background="@drawable/chat_rectangle" android:visibility="invisible">
+        <CheckBox
+                android:text="initial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/state_initial"/>
+        <CheckBox
+                android:text="final"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/state_final"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

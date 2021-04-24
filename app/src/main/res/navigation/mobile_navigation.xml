@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/mobile_navigation"
+            app:startDestination="@+id/navigation_home">
+    <fragment
+            android:id="@+id/navigation_chat"
+            android:label="@string/title_chat"
+            android:tag="chat_tag"
+            tools:layout="@layout/fragment_chat_list"
+            android:name="com.sfu_kras.stud.aeremin_ki18.sjflap.ui.message.ChatListFragment"/>
+    <fragment
+            android:id="@+id/navigation_search"
+            android:name="com.sfu_kras.stud.aeremin_ki18.sjflap.ui.search.SearchFragment"
+            android:label="@string/title_search"
+            android:tag="search_tag"
+            tools:layout="@layout/fragment_search"/>
+    <fragment
+            android:id="@+id/navigation_home"
+            android:name="com.sfu_kras.stud.aeremin_ki18.sjflap.ui.home.HomeFragment"
+            android:label="@string/title_home"
+            tools:layout="@layout/fragment_home"/>
+
+    <fragment
+            android:id="@+id/navigation_new_note"
+            android:name="com.sfu_kras.stud.aeremin_ki18.sjflap.ui.work_panel.WorkPanel"
+            android:label="@string/title_new_note"
+            tools:layout="@layout/fragment_work_panel"/>
+
+    <fragment
+            android:id="@+id/navigation_aboutme"
+            android:name="com.sfu_kras.stud.aeremin_ki18.sjflap.ui.aboutme.AboutmeFragment"
+            android:label="@string/title_about_me"
+            tools:layout="@layout/fragment_aboutme"/>
+
+</navigation>

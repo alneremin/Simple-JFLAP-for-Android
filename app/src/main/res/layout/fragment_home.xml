@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView         xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.home.HomeFragment"
+            android:paddingBottom="100dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dfa_view"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_centerVertical="true"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintBottom_toTopOf="@+id/text_home_nfa"
+                app:layout_constraintTop_toBottomOf="@+id/text_home_dfa"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"/>
+        <TextView
+                android:id="@+id/text_home"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.011"
+                android:text="@string/title_your_projects"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-black"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="16dp"/>
+        <TextView
+                android:id="@+id/text_home_dfa"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/title_dfa_projects"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-black"
+                app:layout_constraintTop_toBottomOf="@+id/text_home" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp" android:layout_marginTop="32dp"/>
+        <TextView
+                android:id="@+id/text_home_nfa"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/title_nfa_projects"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-black"
+                app:layout_constraintTop_toBottomOf="@+id/dfa_view"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_centerVertical="true"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                android:id="@+id/nfa_view"
+                app:layout_constraintTop_toBottomOf="@+id/text_home_nfa" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp" android:layout_marginRight="8dp" android:layout_marginEnd="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
