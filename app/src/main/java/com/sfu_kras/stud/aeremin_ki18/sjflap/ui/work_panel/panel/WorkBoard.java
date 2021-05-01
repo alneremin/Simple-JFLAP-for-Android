@@ -357,6 +357,7 @@ public class WorkBoard extends View {
     @Override
     public void draw(Canvas canvas) {
 
+        super.draw(canvas);
         drawer.setCanvas(canvas);
 
         drawer.drawTransitions(states, transitions);

@@ -1,13 +1,14 @@
 package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.register.ui.register;
 
 import androidx.annotation.Nullable;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.User;
 
 /**
  * Authentication result : success (user details) or error message.
  */
 class RegisterResult {
     @Nullable
-    private LoggedInUserView success;
+    private User success;
     @Nullable
     private Integer error;
 
@@ -15,12 +16,12 @@ class RegisterResult {
         this.error = error;
     }
 
-    RegisterResult(@Nullable LoggedInUserView success) {
+    RegisterResult(@Nullable User success) {
         this.success = success;
     }
 
     @Nullable
-    LoggedInUserView getSuccess() {
+    User getSuccess() {
         return success;
     }
 

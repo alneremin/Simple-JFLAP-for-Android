@@ -1,6 +1,9 @@
 package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.register.data;
 
-import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.register.data.model.LoggedInUser;
+import android.database.sqlite.SQLiteDatabase;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.TableControllerUser;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.User;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.register.data.model.RegisteredUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -14,7 +17,7 @@ public class RegisterRepository {
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
-    private LoggedInUser user = null;
+    private User user = null;
 
     // private constructor : singleton access
     private RegisterRepository(RegisterDataSource dataSource) {
@@ -28,26 +31,17 @@ public class RegisterRepository {
         return instance;
     }
 
-    public boolean isLoggedIn() {
-        return user != null;
-    }
-
-    public void logout() {
-        user = null;
-        dataSource.logout();
-    }
-
-    private void setLoggedInUser(LoggedInUser user) {
+    private void setUser(User user) {
         this.user = user;
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> register(String username, String password) {
+    public Result<User> register(TableControllerUser tcu, User user) {
         // handle login
-        Result<LoggedInUser> result = dataSource.register(username, password);
+        Result<User> result = dataSource.register(tcu, user);
         if (result instanceof Result.Success) {
-            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+            setUser(((Result.Success<User>) result).getData());
         }
         return result;
     }

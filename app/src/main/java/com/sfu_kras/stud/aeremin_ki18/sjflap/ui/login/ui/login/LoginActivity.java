@@ -2,6 +2,8 @@ package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.login.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Parcelable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -21,11 +23,14 @@ import android.widget.Toast;
 
 import com.sfu_kras.stud.aeremin_ki18.sjflap.MainActivity;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.R;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.DatabaseHelper;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.TableControllerUser;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.User;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
-
+    private TableControllerUser tableControllerUser;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.btn_do_register);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
+        tableControllerUser = new TableControllerUser(getApplicationContext());
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -67,12 +73,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra(User.class.getSimpleName(), loginResult.getSuccess());
                     startActivity(intent);
-                }
-                setResult(Activity.RESULT_OK);
 
-                //Complete and destroy login activity once successful
-                finish();
+                    setResult(Activity.RESULT_OK);
+
+                    //Complete and destroy login activity once successful
+                    finish();
+                }
             }
         });
 
@@ -100,7 +108,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
+
+                    loginViewModel.login(tableControllerUser, usernameEditText.getText().toString(),
                             passwordEditText.getText().toString());
                 }
                 return false;
@@ -111,16 +120,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
+
+                loginViewModel.login(tableControllerUser, usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+    private void updateUiWithUser(User model) {
+        String welcome = getString(R.string.welcome) + model.getName();
         // TODO : initiate successful logged in experience
-        //Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

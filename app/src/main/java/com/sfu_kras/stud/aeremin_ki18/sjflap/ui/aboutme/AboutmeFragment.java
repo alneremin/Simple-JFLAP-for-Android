@@ -2,6 +2,7 @@ package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.aboutme;
 
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.MainActivity;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.R;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.google_maps.MapsFragment;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.message.ChatFragment;
@@ -41,6 +43,16 @@ public class AboutmeFragment extends Fragment {
                 transaction.commit(); // Коммитете
             }
         });
+
+        ((TextView) root.findViewById(R.id.name_view)).setText(
+                ((MainActivity)getActivity()).getUser().getName()
+        );
+
+        ((Button) root.findViewById(R.id.btn_address)).setText(
+                ((MainActivity)getActivity()).getUser().getAddress()
+        );
+
+
         return root;
 
     }

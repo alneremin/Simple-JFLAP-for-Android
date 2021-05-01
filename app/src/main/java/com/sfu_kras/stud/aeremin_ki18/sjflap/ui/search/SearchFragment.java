@@ -2,12 +2,14 @@ package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.search;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -40,6 +42,7 @@ public class SearchFragment extends Fragment {
         return new SearchFragment();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,7 @@ public class SearchFragment extends Fragment {
 
         textSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -76,6 +80,7 @@ public class SearchFragment extends Fragment {
         return root;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void performSearch(String text) {
         mDataset.clear();
         initDataset();
@@ -94,6 +99,7 @@ public class SearchFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initDataset() {
         //mDataset = new HomeData[DATASET_COUNT];
         Drawable img;
@@ -102,6 +108,7 @@ public class SearchFragment extends Fragment {
             img = getActivity().getDrawable(R.drawable.ic_dfa);
             mDataset.add(
                     new HomeElement(
+                            i,
                             "is element #" + i,
                             img
                     )

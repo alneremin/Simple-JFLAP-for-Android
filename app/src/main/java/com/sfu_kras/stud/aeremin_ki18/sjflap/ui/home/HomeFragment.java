@@ -1,10 +1,12 @@
 package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.home;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeFragment extends Fragment {
 
@@ -35,6 +39,7 @@ public class HomeFragment extends Fragment {
     protected RecyclerView.LayoutManager mLayoutManager;
     protected ArrayList<HomeElement> mDataset = new ArrayList<>();
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +69,7 @@ public class HomeFragment extends Fragment {
         //setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
         //mDataset = getResources().getStringArray(R.array.cat_names);
-        mAdapter = new CustomAdapter(mDataset);
+        mAdapter = new CustomAdapter(mDataset, this);
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView2.setAdapter(mAdapter);
@@ -113,20 +118,20 @@ public class HomeFragment extends Fragment {
      * Generates Strings for RecyclerView's adapter. This data would usually come
      * from a local content provider or remote server.
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initDataset() {
         //mDataset = new HomeData[DATASET_COUNT];
         Drawable img;
+        String txt;
+
         for (int i = 0; i < DATASET_COUNT; i++) {
-            if (i == 0)
+            if (i == DATASET_COUNT - 1)
                 img = getActivity().getDrawable(R.drawable.ic_new);
             else
                 img = getActivity().getDrawable(R.drawable.ic_dfa);
-
+            txt = (i == DATASET_COUNT - 1) ?  "" : "is element #" + i;
             mDataset.add(
-                    new HomeElement(
-                        "is element #",
-                        img
-                    )
+                    new HomeElement(i, txt, img)
             );
         }
     }

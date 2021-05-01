@@ -1,13 +1,14 @@
 package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.login.ui.login;
 
 import androidx.annotation.Nullable;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.User;
 
 /**
  * Authentication result : success (user details) or error message.
  */
 class LoginResult {
     @Nullable
-    private LoggedInUserView success;
+    private User success;
     @Nullable
     private Integer error;
 
@@ -15,12 +16,12 @@ class LoginResult {
         this.error = error;
     }
 
-    LoginResult(@Nullable LoggedInUserView success) {
+    LoginResult(@Nullable User success) {
         this.success = success;
     }
 
     @Nullable
-    LoggedInUserView getSuccess() {
+    User getSuccess() {
         return success;
     }
 

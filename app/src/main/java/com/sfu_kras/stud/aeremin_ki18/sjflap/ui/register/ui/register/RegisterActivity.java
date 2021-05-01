@@ -1,6 +1,7 @@
 package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.register.ui.register;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -18,11 +19,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.R;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.TableControllerUser;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private RegisterViewModel registerViewModel;
-
+    private TableControllerUser tableControllerUser;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText confirmPasswordEditText = findViewById(R.id.confirm_password);
         final Button registerButton = findViewById(R.id.btn_do_register);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+
+        tableControllerUser = new TableControllerUser(getApplicationContext());
 
         registerViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() {
             @Override
@@ -65,13 +70,14 @@ public class RegisterActivity extends AppCompatActivity {
                 if (registerResult.getError() != null) {
                     showRegisterFailed(registerResult.getError());
                 }
+
                 if (registerResult.getSuccess() != null) {
                     updateUiWithUser(registerResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
+                    setResult(Activity.RESULT_OK);
 
-                //Complete and destroy register activity once successful
-                finish();
+                    //Complete and destroy register activity once successful
+                    finish();
+                }
             }
         });
 
@@ -102,8 +108,11 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    registerViewModel.register(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
+                    User user = new User("Ti Chan",
+                            usernameEditText.getText().toString(),
+                            passwordEditText.getText().toString(),
+                            "Kou Chi, Maio, China");
+                    registerViewModel.register(tableControllerUser, user);
                 }
                 return false;
             }
@@ -112,17 +121,21 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                registerViewModel.register(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                User user = new User("Ti Chan",
+                        usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString(),
+                        "Kou Chi, Maio, China");
+                registerViewModel.register(tableControllerUser, user);
             }
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+    private void updateUiWithUser(User model) {
+        String welcome = "Success!";
         // TODO : initiate successful logged in experience
-        //Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
     private void showRegisterFailed(@StringRes Integer errorString) {

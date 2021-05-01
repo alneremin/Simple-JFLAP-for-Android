@@ -41,7 +41,7 @@ public class GridAdapter extends ArrayAdapter<HomeElement> {
         HomeElement p = getItem(position);
 
         if (p != null) {
-            TextView textView = (TextView) v.findViewById(R.id.textView);
+            TextView textView = (TextView) v.findViewById(R.id.name_file_text_view);
             ImageView imageView = (ImageView) v.findViewById(R.id.IvPicture);
 
             if (textView != null) {

@@ -1,6 +1,7 @@
 package com.sfu_kras.stud.aeremin_ki18.sjflap;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.View;
@@ -19,15 +20,9 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /* try
-        {
-            this.getSupportActionBar().hide();
-        }
-        catch (NullPointerException e){} */
         setContentView(R.layout.activity_start);
 
-        //((TextView)findViewById(R.id.start_name))
-        //        .setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
+
         ((TextView)findViewById(R.id.start_name))
                 .setShadowLayer(3, 0, 0, Color.BLACK);
         Button btn_login = (Button) findViewById(R.id.btn_login);

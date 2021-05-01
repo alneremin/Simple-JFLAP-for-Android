@@ -1,13 +1,16 @@
 package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.register.ui.register;
 
+import android.database.sqlite.SQLiteDatabase;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import android.util.Patterns;
 
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.TableControllerUser;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.User;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.register.data.RegisterRepository;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.register.data.Result;
-import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.register.data.model.LoggedInUser;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.register.data.model.RegisteredUser;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.R;
 
 public class RegisterViewModel extends ViewModel {
@@ -28,15 +31,15 @@ public class RegisterViewModel extends ViewModel {
         return registerResult;
     }
 
-    public void register(String username, String password) {
+    public void register(TableControllerUser tcu, User user) {
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = registerRepository.register(username, password);
+        Result<User> result = registerRepository.register(tcu, user);
 
         if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            registerResult.setValue(new RegisterResult(new LoggedInUserView(data.getDisplayName())));
+            User data = ((Result.Success<User>) result).getData();
+            registerResult.setValue(new RegisterResult(data));
         } else {
-            registerResult.setValue(new RegisterResult(R.string.login_failed));
+            registerResult.setValue(new RegisterResult(R.string.register_failed));
         }
     }
 

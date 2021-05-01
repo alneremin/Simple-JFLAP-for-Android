@@ -4,11 +4,13 @@ import android.graphics.drawable.Drawable;
 
 public class HomeElement {
 
+    private int id;
     private String text;
     private Drawable img;
 
     // constructor
-    public HomeElement(String text, Drawable img) {
+    public HomeElement(int id, String text, Drawable img) {
+        this.id = id;
         this.text = text;
         this.img = img;
     }
@@ -27,5 +29,13 @@ public class HomeElement {
 
     public void setImg(Drawable img) {
         this.img = img;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

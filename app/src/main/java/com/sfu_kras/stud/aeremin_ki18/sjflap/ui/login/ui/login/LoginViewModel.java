@@ -1,10 +1,13 @@
 package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.login.ui.login;
 
+import android.database.sqlite.SQLiteDatabase;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import android.util.Patterns;
 
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.TableControllerUser;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.database.User;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.login.data.LoginRepository;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.login.data.Result;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.login.data.model.LoggedInUser;
@@ -28,13 +31,13 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password) {
+    public void login(TableControllerUser tcu, String username, String password) {
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
+        Result<User> result = loginRepository.login(tcu, username, password);
 
         if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+            User data = ((Result.Success<User>) result).getData();
+            loginResult.setValue(new LoginResult(data));
         } else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
         }

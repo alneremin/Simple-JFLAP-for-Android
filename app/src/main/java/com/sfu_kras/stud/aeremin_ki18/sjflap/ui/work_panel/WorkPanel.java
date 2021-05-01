@@ -33,9 +33,29 @@ public class WorkPanel extends Fragment {
     }
 
     private ArrayList<View> buttons;
+
     private WorkBoard workBoard;
     private EditText editText;
+    private String titleText = "Title1";
     private LinearLayout linearLayout;
+
+
+
+    public String getTitleText() {
+        return titleText;
+    }
+
+    public void setTitleText(String titleText) {
+        this.titleText = titleText;
+    }
+    public WorkBoard getWorkBoard() {
+        return workBoard;
+    }
+
+    public void setWorkBoard(WorkBoard workBoard) {
+        this.workBoard = workBoard;
+    }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -55,6 +75,8 @@ public class WorkPanel extends Fragment {
         workBoard = getActivity().findViewById(R.id.work_board);
         editText = getActivity().findViewById(R.id.transitionText);
         linearLayout = getActivity().findViewById(R.id.state_params);
+        EditText title = getActivity().findViewById(R.id.text_title);
+        title.setText(titleText);
 
         workBoard.getStateField().observe(this, new Observer<StateField>() {
             @Override
