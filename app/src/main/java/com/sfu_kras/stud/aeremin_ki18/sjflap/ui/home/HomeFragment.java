@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.MainActivity;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.R;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,8 +26,6 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
-    private static final int DATASET_COUNT = 10;
-
     public enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
         LINEAR_LAYOUT_MANAGER
@@ -94,10 +95,6 @@ public class HomeFragment extends Fragment {
                 mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT);
                 mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
                 break;
-            case LINEAR_LAYOUT_MANAGER:
-                mLayoutManager = new LinearLayoutManager(getActivity());
-                mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
-                break;
             default:
                 mLayoutManager = new LinearLayoutManager(getActivity());
                 mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
@@ -121,15 +118,22 @@ public class HomeFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initDataset() {
         //mDataset = new HomeData[DATASET_COUNT];
+        MainActivity main = (MainActivity) getActivity();
+        ArrayList<File> files = main.getFileHelper().getFiles();
         Drawable img;
         String txt;
 
-        for (int i = 0; i < DATASET_COUNT; i++) {
-            if (i == DATASET_COUNT - 1)
+        for (int i = 0; i <= files.size(); i++) {
+            if (i == files.size()) {
                 img = getActivity().getDrawable(R.drawable.ic_new);
-            else
+                txt = "";
+            } else {
                 img = getActivity().getDrawable(R.drawable.ic_dfa);
-            txt = (i == DATASET_COUNT - 1) ?  "" : "is element #" + i;
+                txt = files.get(i).getName();
+                if (txt.length() > 3) {
+                    txt = txt.substring(0, txt.length() - 4);
+                }
+            }
             mDataset.add(
                     new HomeElement(i, txt, img)
             );

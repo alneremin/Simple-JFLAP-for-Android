@@ -91,48 +91,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 TextView tv = (TextView) v.findViewById(R.id.name_file_text_view);
-                if (tv.getText().toString() == "") {
-                    openNewBoard();
-                } else {
-                    openExistsBoard(
-                            tv.getText().toString()
-                    );
-                }
+                openBoard(tv.getText().toString());
             }
         });
     }
-    public void openNewBoard() {
 
+    public void openBoard(String path) {
+
+        ((MainActivity) homeFragment.requireActivity()).setCurrentFile(path);
         NavController navController = NavHostFragment.findNavController(this.homeFragment);
         navController.navigate(
                 R.id.action_home_to_work_panel
         );
 
-        /*WorkPanel fragment = new WorkPanel(); // Фрагмент, которым собираетесь заменить первый фрагмент
-        fragment.setTitleText("Title1");
-
-        FragmentTransaction transaction = this.homeFragment.getFragmentManager().beginTransaction(); // Или getSupportFragmentManager(), если используете support.v4
-        transaction.replace(R.id.nav_host_fragment, fragment); // Заменяете вторым фрагментом. Т.е. вместо метода `add()`, используете метод `replace()`
-        transaction.addToBackStack(null); // Добавляете в backstack, чтобы можно было вернутся обратно
-
-        transaction.commit(); // Коммитете*/
-    }
-
-    public void openExistsBoard(String path) {
-
-        NavController navController = NavHostFragment.findNavController(this.homeFragment);
-        navController.navigate(
-                R.id.action_home_to_work_panel
-        );
-
-        /*WorkPanel fragment = new WorkPanel(); // Фрагмент, которым собираетесь заменить первый фрагмент
-        fragment.setTitleText(path);
-
-        FragmentTransaction transaction = this.homeFragment.getFragmentManager().beginTransaction(); // Или getSupportFragmentManager(), если используете support.v4
-        transaction.replace(R.id.nav_host_fragment, fragment); // Заменяете вторым фрагментом. Т.е. вместо метода `add()`, используете метод `replace()`
-        transaction.addToBackStack(null); // Добавляете в backstack, чтобы можно было вернутся обратно
-
-        transaction.commit(); // Коммитете*/
     }
 
     // Return the size of your dataset (invoked by the layout manager)

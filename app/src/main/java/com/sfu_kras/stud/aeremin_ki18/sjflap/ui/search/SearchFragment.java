@@ -6,6 +6,7 @@ import android.os.Build;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -18,13 +19,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.sfu_kras.stud.aeremin_ki18.sjflap.MainActivity;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.R;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.home.CustomAdapter;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.home.HomeElement;
 import com.sfu_kras.stud.aeremin_ki18.sjflap.ui.home.HomeFragment;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
@@ -63,6 +68,13 @@ public class SearchFragment extends Fragment {
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
 
+        mRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                openBoard(mDataset.get(position).getText());
+            }
+        });
+
         textSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -85,7 +97,7 @@ public class SearchFragment extends Fragment {
         mDataset.clear();
         initDataset();
         if (mDataset.size() > 0) {
-            for (int i = mDataset.size() - 1; i >= 0; i--)
+            for (int i = mDataset.size() - 2; i >= 0; i--)
                 if (!mDataset.get(i).getText().contains(text)) {
                     mDataset.remove(i);
                 }
@@ -102,18 +114,36 @@ public class SearchFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initDataset() {
         //mDataset = new HomeData[DATASET_COUNT];
+        MainActivity main = (MainActivity) getActivity();
+        ArrayList<File> files = main.getFileHelper().getFiles();
         Drawable img;
-        for (int i = 0; i < DATASET_COUNT; i++) {
+        String txt;
 
-            img = getActivity().getDrawable(R.drawable.ic_dfa);
+        for (int i = 0; i <= files.size(); i++) {
+            if (i == files.size()) {
+                img = getActivity().getDrawable(R.drawable.ic_new);
+                txt = "";
+            } else {
+                img = getActivity().getDrawable(R.drawable.ic_dfa);
+                txt = files.get(i).getName();
+                if (txt.length() > 3) {
+                    txt = txt.substring(0, txt.length() - 4);
+                }
+            }
             mDataset.add(
-                    new HomeElement(
-                            i,
-                            "is element #" + i,
-                            img
-                    )
+                    new HomeElement(i, txt, img)
             );
         }
+    }
+
+
+    public void openBoard(String path) {
+        ((MainActivity) getActivity()).setCurrentFile(path);
+        NavController navController = NavHostFragment.findNavController(this);
+        navController.navigate(
+                R.id.action_search_to_work_panel
+        );
+
     }
 
 }

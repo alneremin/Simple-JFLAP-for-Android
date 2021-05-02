@@ -15,7 +15,10 @@
             android:name="com.sfu_kras.stud.aeremin_ki18.sjflap.ui.search.SearchFragment"
             android:label="@string/title_search"
             android:tag="search_tag"
-            tools:layout="@layout/fragment_search"/>
+            tools:layout="@layout/fragment_search">
+    <action android:id="@+id/action_search_to_work_panel"
+            app:destination="@id/navigation_new_note"/>
+    </fragment>
     <fragment
             android:id="@+id/navigation_home"
             android:name="com.sfu_kras.stud.aeremin_ki18.sjflap.ui.home.HomeFragment"

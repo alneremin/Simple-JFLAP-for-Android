@@ -1,6 +1,7 @@
 package com.sfu_kras.stud.aeremin_ki18.sjflap.ui.search;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
